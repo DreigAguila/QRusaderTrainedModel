@@ -20,7 +20,7 @@ feature_columns = joblib.load(r"D:\QRusaderTrainedModel\models\feature_columns.p
 # -------------------------------
 # 2️⃣ Load dataset (must include 'url' and 'label')
 # -------------------------------
-features_df = pd.read_csv(r"D:\QRusaderTrainedModel\src\url_features_enhanced.csv")  # replace with your actual dataset path
+features_df = pd.read_csv(r"D:\QRusaderTrainedModel\src\url_features_enhanced.csv")  
 
 # -------------------------------
 # 3️⃣ WHOIS caching
@@ -58,8 +58,12 @@ def shannon_entropy(data):
 suspicious_keywords = ["secure","account","login","update","free","bonus",
                        "ebayisapi","banking","confirm","signin","verification"]
 def contains_suspicious_word(url): return sum(word in url.lower() for word in suspicious_keywords)
-suspicious_ext = [".exe",".bat",".com",".msi",".cmd",".scr",".zip",".rar",".7z",".tar",".gz",
-                  ".js",".vbs",".jar",".ps1",".wsf",".doc",".docm",".xls",".xlsm",".ppt",".pptm",".apk"]
+suspicious_ext = [
+    ".exe", ".bat", ".cmd", ".msi", ".scr",
+    ".js", ".vbs", ".wsf", ".ps1", ".jar", ".hta",
+    ".docm", ".xlsm", ".pptm", ".zip", ".rar", ".7z",
+    ".tar", ".gz", ".apk", ".pif", ".lnk", ".iso", ".img"
+    ]
 def has_suspicious_ext(url): return 1 if any(url.lower().endswith(ext) for ext in suspicious_ext) else 0
 
 # -------------------------------
